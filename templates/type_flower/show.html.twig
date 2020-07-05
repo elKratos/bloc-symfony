@@ -1,0 +1,26 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}TypeFlower{% endblock %}
+
+{% block body %}
+    <h1>TypeFlower</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_flower.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ type_flower.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('type_flower_table') }}">back to list</a>
+
+    <a href="{{ path('type_flower_edit', {'id': type_flower.id}) }}">edit</a>
+
+    {{ include('type_flower/_delete_form.html.twig') }}
+{% endblock %}

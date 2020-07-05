@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+    <div class="details-container">
+
+        <div class="row">
+            <div class="col-5">
+                {% if(product.urlImg) %}
+                    <img src=""
+                         alt="image.png" width="300px" height="400px"/>
+                {% else %}
+                    <img src=""
+                         alt="image.png" width="300px" height="400px"/>
+                {% endif %}
+            </div>
+            <div class="col-7">
+                <div class="mt-5 mb-5">
+                    <h3>{{ product.title }}</h3>
+                    <p class="mr-5">{{ product.description }}</p>
+                    <small>
+                        <strong>
+                            Categoría:
+
+                                Ninguno
+
+                        </strong>
+
+                        <br/>
+
+                        {{ product.publishedAt ? product.publishedAt|date('Y-m-d') : '' }}
+                    </small>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

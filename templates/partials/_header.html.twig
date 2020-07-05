@@ -1,0 +1,64 @@
+<header>
+    <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('default') }}">Flors Kentia Pego</a>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Search -->
+                    <li class="nav-item">
+                        <form class="search-table" method="get" action="">
+                            <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
+                            <input type="search" class="input-search-table" name="key"
+                                   value=""
+                                   placeholder="Buscar">
+                        </form>
+                    </li>
+
+                    <!-- Products -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Productos</a>
+                    </li>
+
+                    <!-- Control Panel -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin') }}">
+                            <i class="fa fa-cog"></i>
+                            Panel de Control
+                        </a>
+                    </li>
+
+                    <!-- Login & Logout -->
+                    <div class="dropdown nav-item">
+                        <button class="btn btn-light ml-2 mr-2" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+
+                            <a class="dropdown-item text-success" href="">
+                                <i class="fa fa-sign-in"></i>
+                                Iniciar Sesión
+                            </a>
+                            <a class="dropdown-item text-success" href="">
+                                <i class="fa fa-user-plus"></i>
+                                Registrarme
+                            </a>
+
+                            <a class="dropdown-item text-success" href="">
+                                <i class="fa fa-user"></i>
+                                Perfil
+                            </a>
+                            <a class="dropdown-item text-danger nav-link" href="">
+                                <i class="fa fa-sign-out"></i>
+                                Cerrar Sesión
+                            </a>
+
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

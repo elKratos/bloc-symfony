@@ -8,10 +8,19 @@
         <title>{% block title %}Fors Kentia Pego{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    {% include 'partials/_header.html.twig' %}
+    {% include 'partials/_header-admin.html.twig' %}
     <body>
         <div class="container">
-            {% block body %}{% endblock %}
+            <div class="row">
+                <div class="col-sm-8">
+                    {% block body %}{% endblock %}
+                </div>
+                <div class="col-sm-4">
+                    {% block sidebar %}
+                        {% include 'partials/_sidebar.html.twig' %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>
         {% include 'partials/_scripts.html.twig' %}
         {% block javascripts %}{% endblock %}

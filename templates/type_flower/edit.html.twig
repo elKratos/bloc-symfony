@@ -1,0 +1,13 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Edit TypeFlower{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeFlower</h1>
+
+    {{ include('type_flower/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('type_flower_table') }}">back to list</a>
+
+    {{ include('type_flower/_delete_form.html.twig') }}
+{% endblock %}

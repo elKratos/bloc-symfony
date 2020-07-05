@@ -1,0 +1,84 @@
+<div class="bg-dark mt-2 mb-2 p-3">
+    <div class="">
+
+        <h5 class="text-white mb-2">Navegación</h5>
+
+        <ul class="list-group m-2">
+            <li class="list-group-item">
+                <a class="dropdown-item" href="{{ path('product_table') }}">Productos</a>
+            </li>
+            <li class="list-group-item">
+                <a class="dropdown-item" href="{{ path('type_flower_table') }}">Categoría</a>
+            </li>
+            <li class="list-group-item">
+                <a class="dropdown-item" href="{{ path('user_table') }}">Usuarios</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <hr class="border-white"/>
+
+    <div class="">
+        <h5 class="text-white mb-2">Filtro</h5>
+
+        <div class="mt-2 mb-2">
+            <p class="text-white font-weight-bold">Por fecha</p>
+
+            <form method="get" action="">
+                <label class="lab-filter text-white mr-1" for="from">Inicio: </label>
+                <input class="date mr-5" name="start" type="date" id="from"
+                       value="">
+                <br>
+
+                <label class="lab-filter text-white mr-1" for="to">Fin: </label>
+                <input class="date" name="end" type="date" id="to"
+                       value="">
+                <br>
+
+                <button name="data" type="submit" class="btn btn-filter btn-primary">
+                    Filtrar
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            <p class="text-white font-weight-bold">Por título</p>
+
+            <form class="search-table" method="get" action="">
+                <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
+                <input type="search" class="input-search-table" name="key"
+                       value=""
+                       placeholder="Buscar">
+            </form>
+        </div>
+
+        <div class="mt-4 mb-4">
+            <p class="text-white font-weight-bold">Por tipo</p>
+
+            <form method="get" action="">
+                <select class="custom-select w-50" id="inputGroupSelect01" name="type">
+                    <option value="-1">Todos</option>
+                    <option value="">
+                    </option>
+                </select>
+                <button type="submit" class="btn btn-primary w-25">Mostrar</button>
+            </form>
+        </div>
+    </div>
+
+    <hr class="border-white"/>
+
+    <div class="">
+        <h5 class="text-white mb-2">Añadir un nuevo producto</h5>
+
+        <a href="">
+            <button type="button" class="btn btn-primary text-center w-100">
+                Añadir
+                <i class="fa fa-plus-square"></i>
+            </button>
+        </a>
+
+    </div>
+
+</div>

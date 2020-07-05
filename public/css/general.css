@@ -1,0 +1,252 @@
+/*
+        Stylesheet Flors Kentia Pego web page
+
+    Index:
+        - Products element
+        - Login
+        - Forms
+        - Delete info
+        - Details product
+        - Table
+        - Filter
+        - Dropdown button
+        - Filter table
+        - Error message
+        - Align
+        - Admin
+        - Style page 404 error
+ */
+
+
+/* Product element in a index and products page */
+.product {
+    text-align: center;
+    width: 220px;
+    margin: 25px;
+    display: inline-block;
+}
+
+.image-product {
+    align-content: center;
+}
+
+.image {
+    width: 100%;
+    height: 240px;
+}
+
+.sub-info {
+    background: #61fa3c;
+    padding: 5px;
+}
+
+.title-product {
+    height: 50px;
+    margin: 5px 0;
+}
+
+.button-product {
+    margin-bottom: 5px;
+}
+
+
+/* Login */
+.login {
+    background: #d8d9d8;
+    width: 80%;
+    margin: 100px auto;
+    padding: 50px;
+}
+
+.form {
+    width: 50%;
+    margin: 25px;
+}
+
+.btn-login {
+    margin-top: 25px;
+}
+
+
+/* Forms new and edit products */
+.form-container {
+    background: #aaaaaa;
+    width: 80%;
+    margin: 100px auto;
+    padding: 50px;
+}
+
+
+/* Delete info */
+.content-info {
+    text-align: left;
+    margin: 25px 25px 25px 50px;
+}
+
+.title-info {
+    font-size: 25px;
+}
+
+.info {
+    list-style: none;
+}
+
+.label-li {
+    font-weight: bold;
+}
+
+.li-element {
+    font-size: 20px;
+}
+
+
+/* Details product */
+.details-container {
+    background: #61fa3c;
+    width: 80%;
+    margin: 100px auto;
+}
+
+
+/* Table */
+
+.title {
+    width: 20%;
+}
+
+.description {
+    width: 30%;
+}
+
+/* Filter */
+.filter {
+    color: #ffffff;
+    width: 50%;
+    padding: 15px;
+}
+
+.filter-label {
+    font-size: large;
+    font-weight: bold;
+    margin: 10px;
+
+}
+
+.lab-filter {
+    width: 10%;
+}
+
+.date {
+    width: 70%;
+    color: #aaaaaa;
+    border: none;
+    padding: 3px;
+    margin: 5px;
+}
+
+.btn-filter {
+    margin: 10px;
+    padding: 3px 30px;
+}
+
+.warning {
+    text-align: center;
+    background: #aaaaaa;
+    width: 75%;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+.warning > h3 {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+
+/* Dropdown button */
+.dropdown-item:hover {
+    background-color: #007bff;
+}
+
+.in-line {
+    display: inline-flex;
+}
+
+/* Filter Table */
+.search-table {
+    background-color: white;
+    padding: 0 5px;
+    margin: 5px;
+}
+
+.input-search-table {
+    background: none;
+    border: none;
+    width: 85%;
+}
+
+.search {
+    background-color: white;
+    padding: 0 5px;
+    margin: 5px;
+}
+
+.btn-search {
+    background: none;
+    border: none;
+}
+
+/* Error message in to forms */
+.error {
+    background-color: rgba(255,0,0,0.3);
+    color: white;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+}
+
+.error > i {
+    margin-right: 10px;
+}
+
+
+/* Align */
+.align-left {
+    text-align: left;
+}
+
+/* Admin */
+
+.admin {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Error page 404 */
+
+.errorMain {
+    background-image: url("../img/error_wallpaper.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    margin: auto;
+    padding: 250px 0;
+}
+
+.errorContainer {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 100px 0;
+}
+
+.errorCode {
+    font-size: 150px;
+    font-weight: bold;
+}
+
+.errorMessage {
+    font-size: 25px;
+    width: 80%;
+    margin: auto;
+}
