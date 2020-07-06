@@ -24,9 +24,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show_details", methods={"GET"})
-     * @param Product $product
-     * @return Response
+     * @Route("/product/{id}", name="show_details", methods={"GET"})
      */
     public function show(Product $product): Response
     {

@@ -3,14 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="name", columns={"name"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"name"}, message="There is already an account with this name")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -42,16 +45,28 @@ class User
      */
     private $role;
 
+
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -59,11 +74,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -71,11 +93,18 @@ class User
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getRole(): ?string
     {
         return $this->role;
     }
 
+    /**
+     * @param string $role
+     * @return $this
+     */
     public function setRole(string $role): self
     {
         $this->role = $role;
@@ -84,4 +113,37 @@ class User
     }
 
 
+    /**
+     * @return null[]|string[]
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+        return [$this->getRole()];
+    }
+
+    /**
+     * @return string|void|null
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+        return $this->getName();
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }

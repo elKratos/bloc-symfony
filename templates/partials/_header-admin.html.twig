@@ -36,25 +36,25 @@
                             <i class="fa fa-user"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-
-                            <a class="dropdown-item text-success" href="/login">
-                                <i class="fa fa-sign-in"></i>
-                                Iniciar Sesión
-                            </a>
-                            <a class="dropdown-item text-success" href="/register">
-                                <i class="fa fa-user-plus"></i>
-                                Registrarme
-                            </a>
-
-                            <a class="dropdown-item text-success" href="/profile">
-                                <i class="fa fa-user"></i>
-                                Perfil
-                            </a>
-                            <a class="dropdown-item text-danger nav-link" href="/logout">
-                                <i class="fa fa-sign-out"></i>
-                                Cerrar Sesión
-                            </a>
-
+                            {% if(app.user) %}
+                                <a class="dropdown-item text-dark" href="/profile">
+                                    <i class="fa fa-user"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
+                                    <i class="fa fa-sign-out"></i>
+                                    Cerrar Sesión
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item text-dark" href="{{ path('app_login') }}">
+                                    <i class="fa fa-sign-in"></i>
+                                    Iniciar Sesión
+                                </a>
+                                <a class="dropdown-item text-dark" href="{{ path('app_register') }}">
+                                    <i class="fa fa-user-plus"></i>
+                                    Registrarme
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </ul>
