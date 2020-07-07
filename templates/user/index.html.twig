@@ -1,6 +1,6 @@
 {% extends 'base-admin.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Control Panel - Users{% endblock %}
 
 {% block body %}
     <h1>User table</h1>
@@ -21,8 +21,14 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.role }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-info btn-block" href="{{ path('user_show', {'id': user.id}) }}">
+                        <i class="fa fa-eye"></i>
+                        show
+                    </a>
+                    <a class="btn btn-warning btn-block" href="{{ path('user_edit', {'id': user.id}) }}">
+                        <i class="fa fa-pencil-square-o"></i>
+                        edit
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +39,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a class="btn btn-success btn-block" href="{{ path('user_new') }}">
+        <i class="fa fa-plus"></i>
+        Create new
+    </a>
 {% endblock %}

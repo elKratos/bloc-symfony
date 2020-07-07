@@ -24,7 +24,23 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/product", name="all_product")
+     */
+    public function all()
+    {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAll();
+
+        return $this->render('default/index.html.twig', [
+            'products' => $products,
+        ]);
+    }
+
+    /**
      * @Route("/product/{id}", name="show_details", methods={"GET"})
+     * @param Product $product
+     * @return Response
      */
     public function show(Product $product): Response
     {

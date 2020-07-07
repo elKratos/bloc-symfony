@@ -1,6 +1,6 @@
 {% extends 'base-admin.html.twig' %}
 
-{% block title %}Control Panel{% endblock %}
+{% block title %}Control Panel - Products{% endblock %}
 
 {% block body %}
 
@@ -13,8 +13,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>PublishedAt</th>
-            <th>UrlImg</th>
-            <th>actions</th>
+            <th class="w-25">actions</th>
         </tr>
         </thead>
         <tbody>
@@ -24,10 +23,15 @@
                 <td>{{ product.title }}</td>
                 <td>{{ product.description | slice(0,100) }}</td>
                 <td>{{ product.publishedAt ? product.publishedAt|date('Y-m-d') : '' }}</td>
-                <td>{{ product.urlImg }}</td>
                 <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    <a class="btn btn-info btn-block" href="{{ path('product_show', {'id': product.id}) }}">
+                        <i class="fa fa-eye"></i>
+                        show
+                    </a>
+                    <a class="btn btn-warning btn-block" href="{{ path('product_edit', {'id': product.id}) }}">
+                        <i class="fa fa-pencil-square-o"></i>
+                        edit
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +42,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('product_new') }}">Create new</a>
+    <a class="btn btn-success btn-block" href="{{ path('product_new') }}">
+        <i class="fa fa-plus"></i>
+        Create new
+    </a>
 
 {% endblock %}

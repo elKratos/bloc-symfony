@@ -18,9 +18,10 @@
 
                     <!-- Products -->
                     <li class="nav-item">
-                        <a class="nav-link" href="">Productos</a>
+                        <a class="nav-link" href="{{ path('all_product') }}">Productos</a>
                     </li>
 
+                    {% if(app.user) %}
                     <!-- Control Panel -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin') }}">
@@ -28,6 +29,7 @@
                             Panel de Control
                         </a>
                     </li>
+                    {% endif %}
 
                     <!-- Login & Logout -->
                     <div class="dropdown nav-item">

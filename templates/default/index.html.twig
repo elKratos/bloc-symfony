@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
@@ -9,10 +9,10 @@
     <div class="product">
         <div class="image-product">
             {% if(product.urlImg) %}
-            <img src=""
+            <img src="/img/product/{{ product.urlImg }}"
             alt="image.png" class="image"/>
             {% else %}
-            <img src=""
+            <img src="/img/product/default.png"
                  alt="image.png" class="image"/>
             {% endif %}
         </div>
