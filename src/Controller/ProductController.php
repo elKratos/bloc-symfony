@@ -48,22 +48,8 @@ class ProductController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('urlImg')->getData();
 
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFile = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-
-                try {
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFile
-                    );
-                } catch (FileException $e) {
-
-                }
-
-                $product->setUrlImg($newFile);
-            }
+            if ($imageFile)
+                $product->setUrlImg($this->uploadFile($slugger, $imageFile));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
@@ -94,14 +80,23 @@ class ProductController extends AbstractController
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Product $product
+     * @param SluggerInterface $slugger
      * @return Response
      */
-    public function edit(Request $request, Product $product): Response
+    public function edit(Request $request, Product $product, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('urlImg')->getData();
+
+            if ($imageFile !== null) {
+                $lastUrlImg = $product->getUrlImg();
+                $product->setUrlImg($this->uploadFile($slugger, $imageFile));
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('product_table');
@@ -128,5 +123,32 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('product_table');
+    }
+
+    /**
+     * @param SluggerInterface $slugger
+     * @param $imageFile
+     * @return string|null
+     */
+    public function uploadFile(SluggerInterface $slugger, $imageFile)
+    {
+        $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFile = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+        try {
+            $imageFile->move(
+                $this->getParameter('images_directory'),
+                $newFile
+            );
+        } catch (FileException $e) {
+
+        }
+        return $newFile;
+    }
+
+    public function deleteFile()
+    {
+
     }
 }
