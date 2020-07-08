@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Password</th>
-                <td>{{ user.password }}</td>
+                <td>{{ user.password | slice(0,60) }}</td>
             </tr>
             <tr>
                 <th>Role</th>
