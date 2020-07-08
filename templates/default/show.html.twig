@@ -8,11 +8,11 @@
 
         <div class="row">
             <div class="col-5">
-                {% if(product.urlImg) %}
-                    <img src="/img/product/{{ product.urlImg }}"
-                         alt="image.png" width="300px" height="400px"/>
-                {% else %}
+                {% if(product.urlImg is empty or product.urlImg == 'NULL') %}
                     <img src="/img/product/default.png"
+                         alt="image.png" width="300px" height="400px"/>
+                {% elseif(product.urlImg) %}
+                    <img src="/img/product/{{ product.urlImg }}"
                          alt="image.png" width="300px" height="400px"/>
                 {% endif %}
             </div>
