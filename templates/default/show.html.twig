@@ -23,9 +23,11 @@
                     <small>
                         <strong>
                             Categoría:
-
-                                Ninguno
-
+                            {% if (product.typeFlower is empty) %}
+                                Ninguna
+                            {% else %}
+                                {{ product.typeFlower.name }}
+                            {% endif %}
                         </strong>
 
                         <br/>

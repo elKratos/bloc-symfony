@@ -27,10 +27,16 @@
                 <th>UrlImg</th>
                 <td>{{ product.urlImg }}</td>
             </tr>
-            {#<tr>
+            <tr>
                 <th>TypeFlower</th>
-                <td>{{ product.typeFlower }}</td>
-            </tr>#}
+                <td>
+                    {% if (product.typeFlower is empty) %}
+                        Ninguna
+                    {% else %}
+                        {{ product.typeFlower.name }}
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
