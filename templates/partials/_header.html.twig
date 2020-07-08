@@ -21,14 +21,14 @@
                         <a class="nav-link" href="{{ path('all_product') }}">Productos</a>
                     </li>
 
-                    {% if(app.user) %}
-                    <!-- Control Panel -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin') }}">
-                            <i class="fa fa-cog"></i>
-                            Panel de Control
-                        </a>
-                    </li>
+                    {% if is_granted('ROLE_USER') %}
+                        <!-- Control Panel -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin') }}">
+                                <i class="fa fa-cog"></i>
+                                Panel de Control
+                            </a>
+                        </li>
                     {% endif %}
 
                     <!-- Login & Logout -->

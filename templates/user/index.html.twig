@@ -25,7 +25,7 @@
                         <i class="fa fa-eye"></i>
                         show
                     </a>
-                    <a class="btn btn-warning btn-block" href="{{ path('user_edit', {'id': user.id}) }}">
+                    <a class="btn btn-warning btn-block {% if (is_granted('ROLE_USER')) %}disabled{% endif %}" href="{{ path('user_edit', {'id': user.id}) }}">
                         <i class="fa fa-pencil-square-o"></i>
                         edit
                     </a>
@@ -39,7 +39,7 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success btn-block" href="{{ path('user_new') }}">
+    <a class="btn btn-success btn-block {% if (is_granted('ROLE_USER')) %}disabled{% endif %}" href="{{ path('user_new') }}">
         <i class="fa fa-plus"></i>
         Create new
     </a>
