@@ -8,12 +8,12 @@
 
     <div class="product">
         <div class="image-product">
-            {% if(product.urlImg) %}
-            <img src="/img/product/{{ product.urlImg }}"
-            alt="image.png" class="image"/>
-            {% else %}
-            <img src="/img/product/default.png"
-                 alt="image.png" class="image"/>
+            {% if(product.urlImg is empty or product.urlImg == 'NULL') %}
+                <img src="/img/product/default.png"
+                     alt="image.png" class="image"/>
+            {% elseif(product.urlImg) %}
+                <img src="/img/product/{{ product.urlImg }}"
+                     alt="image.png" class="image"/>
             {% endif %}
         </div>
         <div class="sub-info">
