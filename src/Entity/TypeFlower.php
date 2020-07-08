@@ -55,6 +55,9 @@ class TypeFlower
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString()
     {
         // TODO: Implement __toString() method.
