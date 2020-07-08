@@ -49,7 +49,8 @@ class ProductType extends AbstractType
 
             ])
             ->add('typeFlower', EntityType::class, [
-                'class' => TypeFlower::class, 'choice_label' => 'name'
+                'class' => TypeFlower::class,
+                'choice_label' => 'name'
             ])
         ;
     }
