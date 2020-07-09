@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\ProductRepository;
+use App\Repository\TypeFlowerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_table", methods={"GET"})
+     * @Route("/no", name="product_table", methods={"GET"})
      */
     public function index(): Response
     {
@@ -28,6 +30,32 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $page
+     * @param string $_format
+     * @param ProductRepository $products
+     * @param TypeFlowerRepository $types
+     * @return Response
+     * @throws \Exception
+     * @Route("/{id}", name="product_table", methods={"GET"})
+     */
+    public function indexPaginated(Request $request, int $page, string $_format, ProductRepository $products, TypeFlowerRepository $types): Response
+    {
+        $type = null;
+        if ($request->query->has('type_flower'))
+            $type = $types->findOneBy(['name' => $request->query->get('type_flower')]);
+
+        $latestProduct = $products->findLatest($page, $type);
+
+        // Every template name also has two extensions that specify the format and
+        // engine for that template.
+        // See https://symfony.com/doc/current/templates.html#template-naming
+        return $this->render('product/index.'.$_format.'.twig', [
+            'paginator' => $latestProduct,
         ]);
     }
 
@@ -65,7 +93,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/{id}/show", name="product_show", methods={"GET"})
      * @param Product $product
      * @return Response
      */
@@ -147,6 +175,9 @@ class ProductController extends AbstractController
         return $newFile;
     }
 
+    /**
+     *
+     */
     public function deleteFile()
     {
 
