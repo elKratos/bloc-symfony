@@ -20,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/no", name="product_table", methods={"GET"})
+     * @Route("/", name="product_table", methods={"GET"})
      */
     public function index(): Response
     {
@@ -41,7 +41,6 @@ class ProductController extends AbstractController
      * @param TypeFlowerRepository $types
      * @return Response
      * @throws \Exception
-     * @Route("/{id}", name="product_table", methods={"GET"})
      */
     public function indexPaginated(Request $request, int $page, string $_format, ProductRepository $products, TypeFlowerRepository $types): Response
     {
