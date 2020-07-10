@@ -1,0 +1,45 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Control Panel - TypeFlower{% endblock %}
+
+{% block body %}
+    <h1>TypeFlower table({{ filter }})</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_flower in type_flowers %}
+            <tr>
+                <td>{{ type_flower.id }}</td>
+                <td>{{ type_flower.name }}</td>
+                <td>
+                    <a class="btn btn-info btn-block" href="{{ path('type_flower_show', {'id': type_flower.id}) }}">
+                        <i class="fa fa-eye"></i>
+                        show
+                    </a>
+                    <a class="btn btn-warning btn-block" href="{{ path('type_flower_edit', {'id': type_flower.id}) }}">
+                        <i class="fa fa-pencil-square-o"></i>
+                        edit
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success btn-block" href="{{ path('type_flower_new') }}">
+        <i class="fa fa-plus"></i>
+        Create new
+    </a>
+
+{% endblock %}

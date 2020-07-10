@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeFlower
  *
  * @ORM\Table(name="type_flower")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TypeFlowerRepository")
  */
 class TypeFlower
 {

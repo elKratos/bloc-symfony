@@ -89,7 +89,7 @@ class TypeFlowerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="type_flower_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="type_flower_delete", methods={"DELETE"})
      * @param Request $request
      * @param TypeFlower $typeFlower
      * @return Response
@@ -103,5 +103,25 @@ class TypeFlowerController extends AbstractController
         }
 
         return $this->redirectToRoute('type_flower_table');
+    }
+
+    /**
+     * @Route("/search", name="search", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function search(Request $request)
+    {
+        if ($request->request->has('key'))
+            $text = $request->request->get('key');
+
+        $typeFlowers = $this->getDoctrine()
+            ->getRepository(TypeFlower::class)
+            ->getByText($text);
+
+        return $this->render('type_flower/result.html.twig', [
+            'types_flowers' => $typeFlowers,
+            'filter' => $text,
+        ]);
     }
 }

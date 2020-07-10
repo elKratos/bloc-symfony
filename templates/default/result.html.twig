@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result: {{ key }}{% endblock %}
+
+{% block body %}
+
+    <h3 class="font-weight-normal mt-4">Result of: {{ key }}</h3>
+
+    {% for product in products %}
+
+        <div class="product">
+            <div class="image-product">
+                {% if(product.urlImg is empty or product.urlImg == 'NULL') %}
+                    <img src="/img/product/default.png"
+                         alt="image.png" class="image"/>
+                {% elseif(product.urlImg) %}
+                    <img src="/img/product/{{ product.urlImg }}"
+                         alt="image.png" class="image"/>
+                {% endif %}
+            </div>
+            <div class="sub-info">
+                <div class="title-product">
+                    <p>{{ product.title }}</p>
+                </div>
+                <div class="button-product">
+                    <a class="btn btn-success" href="{{ path('show_details', { 'id': product.id }) }}">
+                        Ver más
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

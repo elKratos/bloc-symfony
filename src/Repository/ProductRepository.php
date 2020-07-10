@@ -26,6 +26,21 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $text
+     * @return array
+     */
+    public function getByText(string $text):array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where("p.title LIKE :title")
+            ->orderBy("p.publishedAt", "DESC")
+            ->setParameter('title', "%$text%")
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
      * @param int $page
      * @param TypeFlower|null $typeFlower
      * @return Paginator

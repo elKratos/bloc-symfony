@@ -102,7 +102,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="user_delete", methods={"DELETE"})
      * @IsGranted("ROLE_ADMIN")
      * @param Request $request
      * @param User $user
@@ -117,5 +117,25 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_table');
+    }
+
+    /**
+     * @Route("/search", name="search", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function search(Request $request)
+    {
+        if ($request->request->has('key'))
+            $text = $request->request->get('key');
+
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->getByText($text);
+
+        return $this->render('user/result.html.twig', [
+            'users' => $users,
+            'filter' => $text,
+        ]);
     }
 }

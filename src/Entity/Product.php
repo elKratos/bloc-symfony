@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Product
  *
  * @ORM\Table(name="product", indexes={@ORM\Index(name="product_ibfk_1", columns={"type_flower"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
 {
@@ -59,16 +59,26 @@ class Product
      */
     private $typeFlower;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -76,11 +86,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -88,11 +105,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getPublishedAt(): ?\DateTimeInterface
     {
         return $this->publishedAt;
     }
 
+    /**
+     * @param \DateTimeInterface $publishedAt
+     * @return $this
+     */
     public function setPublishedAt(\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
@@ -100,11 +124,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUrlImg(): ?string
     {
         return $this->urlImg;
     }
 
+    /**
+     * @param string|null $urlImg
+     * @return $this
+     */
     public function setUrlImg(?string $urlImg): self
     {
         $this->urlImg = $urlImg;
@@ -112,11 +143,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return TypeFlower|null
+     */
     public function getTypeFlower(): ?TypeFlower
     {
         return $this->typeFlower;
     }
 
+    /**
+     * @param TypeFlower|null $typeFlower
+     * @return $this
+     */
     public function setTypeFlower(?TypeFlower $typeFlower): self
     {
         $this->typeFlower = $typeFlower;

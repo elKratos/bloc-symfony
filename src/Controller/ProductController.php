@@ -28,8 +28,11 @@ class ProductController extends AbstractController
             ->getRepository(Product::class)
             ->findAll();
 
+        $url = $_SERVER['REQUEST_URI'];
+
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'url' => $url,
         ]);
     }
 
@@ -136,7 +139,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="product_delete", methods={"DELETE"})
      * @param Request $request
      * @param Product $product
      * @return Response
@@ -175,10 +178,43 @@ class ProductController extends AbstractController
     }
 
     /**
-     *
+     * @Route("/search", name="search", methods={"POST"})
+     * @param Request $request
+     * @return Response
      */
-    public function deleteFile()
+    public function search(Request $request)
     {
+        if ($request->request->has('key'))
+            $text = $request->request->get('key');
 
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->getByText($text);
+
+        return $this->render('product/result.html.twig', [
+            'products' => $products,
+            'filter' => $text,
+        ]);
+    }
+
+    /**
+     * @Route("/date", name="date", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function date(Request $request)
+    {
+        if ($request->request->has('start')) {
+            $text = $request->request->get('key');
+        }
+
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->getByText($text);
+
+        return $this->render('admin/result.html.twig', [
+            'products' => $products,
+            'filter' => $text,
+        ]);
     }
 }

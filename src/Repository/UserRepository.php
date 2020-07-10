@@ -4,15 +4,15 @@
 namespace App\Repository;
 
 
-use App\Entity\TypeFlower;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class TypeFlowerRepository
+ * Class UserRepository
  * @package App\Repository
  */
-class TypeFlowerRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository
 {
     /**
      * TypeFlowerRepository constructor.
@@ -20,7 +20,7 @@ class TypeFlowerRepository extends ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TypeFlower::class);
+        parent::__construct($registry, User::class);
     }
 
     /**
@@ -29,8 +29,8 @@ class TypeFlowerRepository extends ServiceEntityRepository
      */
     public function getByText(string $text):array
     {
-        $query = $this->createQueryBuilder('t')
-            ->where("t.name LIKE :name")
+        $query = $this->createQueryBuilder('u')
+            ->where("u.name LIKE :name")
             ->setParameter('name', "%$text%")
             ->getQuery();
 

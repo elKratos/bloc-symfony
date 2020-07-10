@@ -1,0 +1,46 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Control Panel - Users{% endblock %}
+
+{% block body %}
+    <h1>User table({{ filter }})</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a class="btn btn-info btn-block" href="{{ path('user_show', {'id': user.id}) }}">
+                        <i class="fa fa-eye"></i>
+                        show
+                    </a>
+                    <a class="btn btn-warning btn-block {% if (is_granted('ROLE_USER')) %}disabled{% endif %}" href="{{ path('user_edit', {'id': user.id}) }}">
+                        <i class="fa fa-pencil-square-o"></i>
+                        edit
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success btn-block {% if (is_granted('ROLE_USER')) %}disabled{% endif %}" href="{{ path('user_new') }}">
+        <i class="fa fa-plus"></i>
+        Create new
+    </a>
+{% endblock %}
