@@ -22,10 +22,11 @@
     <div class="">
         <h5 class="text-white mb-2">Filtro</h5>
 
+        {% if (url == '/admin/product/') %}
         <div class="mt-2 mb-2">
-            <p class="text-white font-weight-bold">Por fecha</p>
+            <p class="text-white font-weight-bold">Por fecha (Productos)</p>
 
-            <form method="get" action="">
+            <form method="post" action="{{ path('date_product') }}">
                 <label class="lab-filter text-white mr-1" for="from">Inicio: </label>
                 <input class="date mr-5" name="start" type="date" id="from"
                        value="">
@@ -41,6 +42,7 @@
                 </button>
             </form>
         </div>
+        {% endif %}
 
         <div class="mt-4">
             <p class="text-white font-weight-bold">Por título</p>
@@ -48,22 +50,49 @@
             <form class="search-table" method="post" action="{{ url }}search">
                 <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
                 <input type="search" class="input-search-table" name="key"
-                       value=""
                        placeholder="Buscar">
             </form>
         </div>
 
+        {% if (url == '/admin/product/') %}
         <div class="mt-4 mb-4">
             <p class="text-white font-weight-bold">Por tipo</p>
 
-            <form method="get" action="">
+            <form method="post" action="{{ path('type_filter_product') }}">
                 <select class="custom-select w-50" id="inputGroupSelect01" name="type">
                     <option value="-1">Todos</option>
-                    <option value="">
-                    </option>
+                    {% for type_flower in types_flower %}
+                    <option value="{{ type_flower.id }}">{{ type_flower.name }}</option>
+                    {% endfor %}
                 </select>
                 <button type="submit" class="btn btn-primary w-25">Mostrar</button>
             </form>
+        </div>
+        {% elseif (url == '/admin/user/') %}
+        <div class="mt-4 mb-4">
+            <p class="text-white font-weight-bold">Por rol</p>
+
+            <form method="post" action="{{ path('role_user') }}">
+                <select class="custom-select w-50" id="inputGroupSelect01" name="type">
+                    <option value="-1">Todos</option>
+                    <option value="ROLE_ADMIN">Administradores</option>
+                    <option value="ROLE_USER">Usuarios</option>
+                </select>
+                <button type="submit" class="btn btn-primary w-25">Mostrar</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <hr class="border-white"/>
+
+        <div class="mt-4 mb-4">
+            <h4 class="text-white mb-2">Añadir un nuevo elemento</h4>
+
+            <a class="btn btn-primary text-center w-100 {% if(not is_granted('ROLE_ADMIN') and url == '/admin/user/') %}disabled{% endif %}"
+               href="{{ url }}new">
+                Añadir
+                <i class="fa fa-plus-square"></i>
+            </a>
         </div>
     </div>
 

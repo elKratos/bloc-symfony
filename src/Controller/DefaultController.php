@@ -51,7 +51,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="search", methods={"POST"})
+     * @Route("/search", name="search_default", methods={"POST"})
      * @param Request $request
      * @return Response
      */

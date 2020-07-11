@@ -6,16 +6,6 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Search -->
-                    <li class="nav-item">
-                        <form class="search-table" method="get" action="/products/search/1">
-                            <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
-                            <input type="search" class="input-search-table" name="key"
-                                   value=""
-                                   placeholder="Buscar">
-                        </form>
-                    </li>
-
                     <!-- Products -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('all_product') }}">Productos</a>
@@ -23,7 +13,7 @@
 
                     <!-- Control Panel -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin') }}">
+                        <a class="nav-link" href="{{ path('product_table') }}">
                             <i class="fa fa-cog"></i>
                             Panel de Control
                         </a>

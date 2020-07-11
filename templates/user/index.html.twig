@@ -38,9 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-success btn-block {% if (is_granted('ROLE_USER')) %}disabled{% endif %}" href="{{ path('user_new') }}">
-        <i class="fa fa-plus"></i>
-        Create new
-    </a>
 {% endblock %}

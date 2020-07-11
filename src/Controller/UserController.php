@@ -27,6 +27,7 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', [
             'users' => $users,
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -56,6 +57,7 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
+            'url' => $this->getUrl(),
             'form' => $form->createView(),
         ]);
     }
@@ -69,6 +71,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -97,6 +100,7 @@ class UserController extends AbstractController
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
+            'url' => $this->getUrl(),
             'form' => $form->createView(),
         ]);
     }
@@ -120,7 +124,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="search", methods={"POST"})
+     * @Route("/search", name="search_user", methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -136,6 +140,36 @@ class UserController extends AbstractController
         return $this->render('user/result.html.twig', [
             'users' => $users,
             'filter' => $text,
+            'url' => $this->getUrl(),
         ]);
+    }
+
+    /**
+     * @Route("/role-filter", name="role_user", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function getByType(Request $request)
+    {
+        if ($request->request->has('type'))
+            $type = $request->request->get('type');
+
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->getByRole($type);
+
+        return $this->render('user/result.html.twig', [
+            'users' => $users,
+            'filter' => $type,
+            'url' => $this->getUrl(),
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl():string
+    {
+        return '/admin/user/';
     }
 }

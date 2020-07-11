@@ -8,7 +8,7 @@
 
                     <!-- Search -->
                     <li class="nav-item">
-                        <form class="search-table" method="post" action="/search">
+                        <form class="search-table" method="post" action="{{ path('search_default') }}">
                             <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
                             <input type="search" class="input-search-table" name="key"
                                    value=""
@@ -24,7 +24,7 @@
                     {% if app.user %}
                         <!-- Control Panel -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin') }}">
+                            <a class="nav-link" href="{{ path('product_table') }}">
                                 <i class="fa fa-cog"></i>
                                 Panel de Control
                             </a>

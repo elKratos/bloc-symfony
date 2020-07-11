@@ -6,6 +6,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use App\Entity\TypeFlower;
 use App\Pagination\Paginator;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Exception;
@@ -41,6 +42,42 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $start
+     * @param string $end
+     * @return array
+     * @throws Exception
+     */
+    public function getByDate(string $start, string $end):array
+    {
+        $start = new DateTime($start);
+        $end = new DateTime($end);
+
+        $query = $this->createQueryBuilder('p')
+            ->where("p.publishedAt BETWEEN :start AND :end")
+            ->orderBy("p.publishedAt", "DESC")
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function getByType(int $id):array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where("p.typeFlower = :id")
+            ->orderBy("p.publishedAt", "DESC")
+            ->setParameter(':id', $id)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
      * @param int $page
      * @param TypeFlower|null $typeFlower
      * @return Paginator
@@ -54,7 +91,7 @@ class ProductRepository extends ServiceEntityRepository
             ->leftJoin('p.type_flower', 't')
             ->where('p.publishedAt <= :now')
             ->orderBy('p.publishedAt', 'DESC')
-            ->setParameter('now', new \DateTime())
+            ->setParameter('now', new DateTime())
         ;
 
         if (null !== $typeFlower) {

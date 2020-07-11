@@ -25,6 +25,7 @@ class TypeFlowerController extends AbstractController
 
         return $this->render('type_flower/index.html.twig', [
             'type_flowers' => $typeFlowers,
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -49,6 +50,7 @@ class TypeFlowerController extends AbstractController
 
         return $this->render('type_flower/new.html.twig', [
             'type_flower' => $typeFlower,
+            'url' => $this->getUrl(),
             'form' => $form->createView(),
         ]);
     }
@@ -62,6 +64,7 @@ class TypeFlowerController extends AbstractController
     {
         return $this->render('type_flower/show.html.twig', [
             'type_flower' => $typeFlower,
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -85,6 +88,7 @@ class TypeFlowerController extends AbstractController
         return $this->render('type_flower/edit.html.twig', [
             'type_flower' => $typeFlower,
             'form' => $form->createView(),
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -106,7 +110,7 @@ class TypeFlowerController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="search", methods={"POST"})
+     * @Route("/search", name="search_type_flower", methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -120,8 +124,17 @@ class TypeFlowerController extends AbstractController
             ->getByText($text);
 
         return $this->render('type_flower/result.html.twig', [
-            'types_flowers' => $typeFlowers,
+            'type_flowers' => $typeFlowers,
             'filter' => $text,
+            'url' => $this->getUrl(),
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl():string
+    {
+        return '/admin/type/flower/';
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\TypeFlower;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Repository\TypeFlowerRepository;
@@ -28,11 +29,10 @@ class ProductController extends AbstractController
             ->getRepository(Product::class)
             ->findAll();
 
-        $url = $_SERVER['REQUEST_URI'];
-
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'url' => $url,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
         ]);
     }
 
@@ -58,6 +58,8 @@ class ProductController extends AbstractController
         // See https://symfony.com/doc/current/templates.html#template-naming
         return $this->render('product/index.'.$_format.'.twig', [
             'paginator' => $latestProduct,
+            'types_flower' => $this->allTypesFlower(),
+            'url' => $this->getUrl(),
         ]);
     }
 
@@ -90,6 +92,8 @@ class ProductController extends AbstractController
 
         return $this->render('product/new.html.twig', [
             'product' => $product,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
             'form' => $form->createView(),
         ]);
     }
@@ -103,6 +107,8 @@ class ProductController extends AbstractController
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
         ]);
     }
 
@@ -135,6 +141,8 @@ class ProductController extends AbstractController
         return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
         ]);
     }
 
@@ -178,7 +186,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/search", name="search", methods={"POST"})
+     * @Route("/search", name="search_product", methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -194,27 +202,78 @@ class ProductController extends AbstractController
         return $this->render('product/result.html.twig', [
             'products' => $products,
             'filter' => $text,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
         ]);
     }
 
     /**
-     * @Route("/date", name="date", methods={"POST"})
+     * @Route("/date", name="date_product", methods={"POST"})
      * @param Request $request
      * @return Response
      */
     public function date(Request $request)
     {
-        if ($request->request->has('start')) {
-            $text = $request->request->get('key');
-        }
+        if ($request->request->has('start'))
+            $start = $request->request->get('start');
+
+        if ($request->request->has('end'))
+            $end = $request->request->get('end');
 
         $products = $this->getDoctrine()
             ->getRepository(Product::class)
-            ->getByText($text);
+            ->getByDate($start, $end);
 
-        return $this->render('admin/result.html.twig', [
+        return $this->render('product/result.html.twig', [
             'products' => $products,
-            'filter' => $text,
+            'filter' => $start." & ".$end,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
         ]);
+    }
+
+    /**
+     * @Route("/type-filter", name="type_filter_product", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function getByType(Request $request)
+    {
+        if ($request->request->has('type'))
+            $type = $request->request->get('type');
+
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->getByType($type);
+
+        $type = $this->getDoctrine()
+            ->getRepository(TypeFlower::class)
+            ->findOneBy(['id' => $type])
+            ->getName();
+
+        return $this->render('product/result.html.twig', [
+            'products' => $products,
+            'filter' => $type,
+            'url' => $this->getUrl(),
+            'types_flower' => $this->allTypesFlower(),
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl():string
+    {
+        return '/admin/product/';
+    }
+
+    /**
+     * @return array
+     */
+    public function allTypesFlower():array
+    {
+        return $this->getDoctrine()
+                    ->getRepository(TypeFlower::class)
+                    ->findAll();
     }
 }
